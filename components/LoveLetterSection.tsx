@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 // ── Customise here ──────────────────────────────────────────────────────────
@@ -53,7 +53,7 @@ function LetterParagraph({ text, delay, once }: { text: string; delay: number; o
         animate={inView ? { opacity: 1 } : {}}
         transition={{ delay: delay * 0.1 }}
         className="font-dancing text-love-cream/90 leading-relaxed mb-6"
-        style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)', minHeight: '2em' }}
+        style={{ fontSize: 'clamp(1rem, 3.5vw, 1.5rem)', minHeight: '2em' }}
       >
         {active ? displayed : ''}
         {!active && text}
@@ -66,8 +66,14 @@ export default function LoveLetterSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const inView = useInView(sectionRef, { once: true, margin: '-100px' })
 
-  // Floating petals
-  const petals = Array.from({ length: 12 }, (_, i) => ({
+  // Floating petals — fewer on mobile for performance
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
+
+  const petalCount = isMobile ? 5 : 12
+  const petals = Array.from({ length: petalCount }, (_, i) => ({
     id: i,
     left: `${Math.random() * 100}%`,
     delay: Math.random() * 5,
@@ -79,7 +85,7 @@ export default function LoveLetterSection() {
     <section
       id="love-letter"
       ref={sectionRef}
-      className="relative py-24 px-6 bg-letter overflow-hidden"
+      className="relative py-16 sm:py-24 px-4 sm:px-6 bg-letter overflow-hidden"
     >
       {/* Floating petals background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -106,12 +112,12 @@ export default function LoveLetterSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
-        className="text-center mb-16"
+        className="text-center mb-10 sm:mb-16"
       >
         <p className="font-cormorant text-love-rose/70 tracking-widest uppercase text-sm mb-3">
           — Thư tình —
         </p>
-        <h2 className="font-playfair text-4xl md:text-5xl text-love-cream text-glow">
+        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-love-cream text-glow">
           Anh muốn nói với em...
         </h2>
         <div className="flex justify-center gap-2 mt-4 text-xl">
@@ -128,22 +134,22 @@ export default function LoveLetterSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative rounded-3xl p-8 md:p-14 animate-border-glow"
+          className="relative rounded-3xl p-5 sm:p-8 md:p-14 animate-border-glow"
           style={{
             background:
               'linear-gradient(145deg, rgba(255,77,109,0.06) 0%, rgba(13,0,21,0.9) 50%, rgba(255,133,161,0.06) 100%)',
             border: '1px solid rgba(255,77,109,0.2)',
           }}
         >
-          {/* Corner ornaments */}
-          <div className="absolute top-4 left-4 text-love-rose/30 text-3xl select-none">❦</div>
-          <div className="absolute top-4 right-4 text-love-rose/30 text-3xl select-none rotate-180">❦</div>
-          <div className="absolute bottom-4 left-4 text-love-rose/30 text-3xl select-none rotate-90">❦</div>
-          <div className="absolute bottom-4 right-4 text-love-rose/30 text-3xl select-none -rotate-90">❦</div>
+          {/* Corner ornaments — hidden on small screens to avoid overlapping text */}
+          <div className="absolute top-4 left-4 text-love-rose/30 text-xl sm:text-3xl select-none hidden sm:block">❦</div>
+          <div className="absolute top-4 right-4 text-love-rose/30 text-xl sm:text-3xl select-none rotate-180 hidden sm:block">❦</div>
+          <div className="absolute bottom-4 left-4 text-love-rose/30 text-xl sm:text-3xl select-none rotate-90 hidden sm:block">❦</div>
+          <div className="absolute bottom-4 right-4 text-love-rose/30 text-xl sm:text-3xl select-none -rotate-90 hidden sm:block">❦</div>
 
           {/* Opening decoration */}
-          <div className="text-center mb-10">
-            <div className="text-5xl animate-heart-beat">💌</div>
+          <div className="text-center mb-6 sm:mb-10">
+            <div className="text-4xl sm:text-5xl animate-heart-beat">💌</div>
           </div>
 
           {/* Letter paragraphs */}

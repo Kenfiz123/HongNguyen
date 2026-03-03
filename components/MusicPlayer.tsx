@@ -14,7 +14,11 @@ const SONG_ARTIST = 'Dành tặng em'
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
-  const [expanded, setExpanded] = useState(true)
+  // Auto-collapse on mobile to reduce screen obstruction
+  const [expanded, setExpanded] = useState(() => {
+    if (typeof window !== 'undefined') return window.innerWidth >= 768
+    return true
+  })
   const [volume, setVolume] = useState(0.6)
   const [hasMusic, setHasMusic] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -79,7 +83,8 @@ export default function MusicPlayer() {
         initial={{ x: 120, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 2, type: 'spring', bounce: 0.3 }}
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-4 right-3 sm:right-4 z-50"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
         <AnimatePresence mode="wait">
           {expanded ? (
@@ -88,8 +93,11 @@ export default function MusicPlayer() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="glass-dark rounded-2xl p-4 w-72 shadow-2xl"
-              style={{ boxShadow: '0 0 30px rgba(255,77,109,0.2), 0 8px 32px rgba(0,0,0,0.5)' }}
+              className="glass-dark rounded-2xl p-4 shadow-2xl"
+              style={{
+                width: 'min(288px, calc(100vw - 3rem))',
+                boxShadow: '0 0 30px rgba(255,77,109,0.2), 0 8px 32px rgba(0,0,0,0.5)',
+              }}
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-4">
@@ -137,9 +145,9 @@ export default function MusicPlayer() {
                 />
               </div>
 
-              {/* Equalizer bars (visual only) */}
+              {/* Equalizer bars (visual only) — fewer on mobile */}
               <div className="flex items-end gap-0.5 h-6 mb-4 justify-center">
-                {Array.from({ length: 20 }).map((_, i) => (
+                {Array.from({ length: typeof window !== 'undefined' && window.innerWidth < 768 ? 14 : 20 }).map((_, i) => (
                   <motion.div
                     key={i}
                     className="w-1.5 rounded-sm"

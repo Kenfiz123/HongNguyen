@@ -19,11 +19,27 @@
 ::-webkit-scrollbar-thumb:hover { background: #ff85a1; }
 
 /* ── Base ──────────────────────────────────────── */
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Support notched phones */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
 
 body {
   background: var(--color-bg);
   cursor: none;
+  /* Prevent pull-to-refresh on mobile */
+  overscroll-behavior-y: contain;
+  /* Better text rendering on mobile */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Touch devices: restore native cursor ──────── */
+@media (hover: none) and (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none !important; }
 }
 
 /* ── Custom cursor ─────────────────────────────── */
@@ -200,7 +216,13 @@ body {
   height: 100%;
 }
 
-.flip-card:hover .flip-card-inner,
+/* Desktop: hover to flip; mobile: tap only (touch devices ignore hover) */
+@media (hover: hover) {
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
 .flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
@@ -285,4 +307,56 @@ body {
 /* ── Heart path ────────────────────────────────── */
 .heart-svg {
   filter: drop-shadow(0 0 8px rgba(255, 77, 109, 0.6));
+}
+
+/* ── Mobile optimizations ─────────────────────── */
+@media (max-width: 640px) {
+  /* Reduce glow intensity on mobile for performance */
+  .text-glow {
+    text-shadow: 0 0 12px rgba(255, 77, 109, 0.5),
+                 0 0 24px rgba(255, 77, 109, 0.2);
+  }
+
+  .text-gold-glow {
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.5),
+                 0 0 24px rgba(255, 215, 0, 0.2);
+  }
+
+  /* Reduce glass blur on mobile for GPU performance */
+  .glass {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .glass-dark {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Reduce border glow animation intensity */
+  .animate-border-glow {
+    animation: borderGlow 3s ease-in-out infinite;
+  }
+
+  /* Smaller heart SVG glow on mobile */
+  .heart-svg {
+    filter: drop-shadow(0 0 6px rgba(255, 77, 109, 0.5));
+  }
+}
+
+/* ── Prevent text selection on interactive elements ── */
+@media (hover: none) and (pointer: coarse) {
+  .flip-card,
+  .flip-card-inner,
+  .flip-card-front,
+  .flip-card-back {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Faster flip animation on mobile */
+  .flip-card-inner {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }

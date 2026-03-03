@@ -27,7 +27,7 @@ function ReasonCard({ reason, index }: { reason: (typeof REASONS)[0]; index: num
       initial={{ opacity: 0, y: 50, rotate: -3 }}
       animate={inView ? { opacity: 1, y: 0, rotate: 0 } : {}}
       transition={{ duration: 0.6, delay: (index % 4) * 0.1 }}
-      className="flip-card h-48"
+      className="flip-card h-44 sm:h-48"
       onClick={() => setFlipped((f) => !f)}
     >
       <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
@@ -58,7 +58,7 @@ function ReasonCard({ reason, index }: { reason: (typeof REASONS)[0]; index: num
 
         {/* Back */}
         <div
-          className="flip-card-back flex items-center justify-center p-6 cursor-pointer"
+          className="flip-card-back flex items-center justify-center p-4 sm:p-6 cursor-pointer"
           style={{
             background: 'linear-gradient(135deg, rgba(255,77,109,0.15) 0%, rgba(13,0,21,0.95) 100%)',
             border: '1px solid rgba(255,77,109,0.3)',
@@ -66,7 +66,7 @@ function ReasonCard({ reason, index }: { reason: (typeof REASONS)[0]; index: num
         >
           <div className="text-center">
             <div className="text-2xl mb-3">{reason.emoji}</div>
-            <p className="font-dancing text-love-cream/90 leading-relaxed" style={{ fontSize: '1.05rem' }}>
+            <p className="font-dancing text-love-cream/90 leading-relaxed text-sm sm:text-base" style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1.05rem)' }}>
               "{reason.desc}"
             </p>
             <div className="mt-3 text-love-pink text-lg">❤️</div>
@@ -82,7 +82,7 @@ export default function ReasonsSection() {
   const inView = useInView(titleRef, { once: true })
 
   return (
-    <section id="reasons" className="relative py-24 px-6 overflow-hidden"
+    <section id="reasons" className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #050510 0%, #0d0015 50%, #050510 100%)' }}
     >
       {/* Background glow */}
@@ -91,7 +91,7 @@ export default function ReasonsSection() {
       />
 
       {/* Title */}
-      <div ref={titleRef} className="text-center mb-16">
+      <div ref={titleRef} className="text-center mb-10 sm:mb-16">
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -103,7 +103,7 @@ export default function ReasonsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
-          className="font-playfair text-4xl md:text-5xl text-love-cream text-glow"
+          className="font-playfair text-3xl sm:text-4xl md:text-5xl text-love-cream text-glow"
         >
           Tại sao anh yêu em?
         </motion.h2>
@@ -124,27 +124,28 @@ export default function ReasonsSection() {
       </div>
 
       {/* Grid */}
-      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         {REASONS.map((reason, i) => (
           <ReasonCard key={i} reason={reason} index={i} />
         ))}
       </div>
 
       {/* Bottom counter */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.5 }}
-        className="text-center mt-16 glass-dark rounded-full px-10 py-5 inline-flex items-center gap-4 mx-auto flex justify-center"
-        style={{ maxWidth: 'fit-content', margin: '4rem auto 0' }}
-      >
-        <span className="text-3xl animate-heart-beat">❤️</span>
-        <span className="font-dancing text-love-cream text-xl">
-          Và còn vô vàn lý do khác mà anh không thể đếm hết...
-        </span>
-        <span className="text-3xl animate-heart-beat">❤️</span>
-      </motion.div>
+      <div className="flex justify-center mt-16 px-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="glass-dark rounded-3xl sm:rounded-full px-6 sm:px-10 py-4 sm:py-5 flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center"
+        >
+          <span className="text-2xl sm:text-3xl animate-heart-beat">❤️</span>
+          <span className="font-dancing text-love-cream text-base sm:text-xl">
+            Và còn vô vàn lý do khác mà anh không thể đếm hết...
+          </span>
+          <span className="text-2xl sm:text-3xl animate-heart-beat">❤️</span>
+        </motion.div>
+      </div>
     </section>
   )
 }

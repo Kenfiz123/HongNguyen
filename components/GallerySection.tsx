@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
@@ -91,9 +91,11 @@ function PhotoCard({
         ❤️
       </motion.div>
 
-      {/* Caption */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-        <p className="font-dancing text-white text-lg drop-shadow-lg">{photo.caption}</p>
+      {/* Caption — always visible on touch devices, slide up on hover for desktop */}
+      <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 sm:translate-y-full sm:group-hover:translate-y-0 transition-transform duration-500"
+        style={{ background: 'linear-gradient(to top, rgba(5,5,16,0.85) 0%, transparent 100%)' }}
+      >
+        <p className="font-dancing text-white text-sm sm:text-lg drop-shadow-lg">{photo.caption}</p>
       </div>
 
       {/* Border glow on hover */}
@@ -104,23 +106,82 @@ function PhotoCard({
 
 function Lightbox({
   photo,
+  index,
+  total,
   onClose,
   onPrev,
   onNext,
 }: {
   photo: (typeof PHOTOS)[0]
+  index: number
+  total: number
   onClose: () => void
   onPrev: () => void
   onNext: () => void
 }) {
+  const touchStart = useRef<{ x: number; y: number } | null>(null)
+  const touchDelta = useRef(0)
+
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    const scrollY = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      document.body.style.overflow = ''
+      window.scrollTo(0, scrollY)
+    }
+  }, [])
+
+  // Keyboard navigation
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') onPrev()
+      else if (e.key === 'ArrowRight') onNext()
+      else if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onPrev, onNext, onClose])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+    touchDelta.current = 0
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStart.current) return
+    touchDelta.current = e.touches[0].clientX - touchStart.current.x
+  }
+
+  const handleTouchEnd = () => {
+    if (Math.abs(touchDelta.current) > 60) {
+      if (touchDelta.current > 0) onPrev()
+      else onNext()
+    }
+    touchStart.current = null
+    touchDelta.current = 0
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4"
       style={{ background: 'rgba(5,5,16,0.95)' }}
       onClick={onClose}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
@@ -136,30 +197,39 @@ function Lightbox({
             alt={photo.caption}
             width={photo.width}
             height={photo.height}
-            className="w-full h-auto max-h-[80vh] object-contain"
+            className="w-full h-auto max-h-[70vh] sm:max-h-[80vh] object-contain"
           />
         </div>
 
-        <p className="font-dancing text-love-cream text-xl text-center mt-4">{photo.caption}</p>
+        {/* Caption + counter */}
+        <div className="text-center mt-3 px-12">
+          <p className="font-dancing text-love-cream text-base sm:text-xl">{photo.caption}</p>
+          <p className="font-cormorant text-love-rose/40 text-xs mt-1">{index + 1} / {total}</p>
+        </div>
 
-        {/* Close */}
+        {/* Swipe hint on mobile */}
+        <p className="sm:hidden text-center font-cormorant text-love-rose/30 text-xs mt-2">
+          ← Vuốt để xem thêm →
+        </p>
+
+        {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute -top-4 -right-4 w-10 h-10 bg-love-pink rounded-full flex items-center justify-center text-white hover:bg-love-rose transition-colors text-lg font-bold"
+          className="absolute top-2 right-2 sm:-top-4 sm:-right-4 w-10 h-10 bg-love-pink rounded-full flex items-center justify-center text-white hover:bg-love-rose transition-colors text-lg font-bold shadow-lg z-10"
         >
           ×
         </button>
 
-        {/* Nav arrows */}
+        {/* Nav arrows — hidden on small mobile, larger touch targets */}
         <button
-          onClick={onPrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 glass rounded-full flex items-center justify-center text-white hover:bg-love-pink/20 transition-colors"
+          onClick={(e) => { e.stopPropagation(); onPrev() }}
+          className="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-12 sm:h-12 glass rounded-full flex items-center justify-center text-white hover:bg-love-pink/20 transition-colors text-lg sm:text-xl hidden xs:flex sm:flex"
         >
           ‹
         </button>
         <button
-          onClick={onNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 glass rounded-full flex items-center justify-center text-white hover:bg-love-pink/20 transition-colors"
+          onClick={(e) => { e.stopPropagation(); onNext() }}
+          className="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-12 sm:h-12 glass rounded-full flex items-center justify-center text-white hover:bg-love-pink/20 transition-colors text-lg sm:text-xl hidden xs:flex sm:flex"
         >
           ›
         </button>
@@ -177,14 +247,14 @@ export default function GallerySection() {
   const next = () => setLightboxIdx((i) => (i === null ? null : (i + 1) % PHOTOS.length))
 
   return (
-    <section id="gallery" className="relative py-24 px-6 bg-love-dark overflow-hidden">
+    <section id="gallery" className="relative py-16 sm:py-24 px-4 sm:px-6 bg-love-dark overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(255,77,109,0.05) 0%, transparent 60%)' }}
       />
 
       {/* Title */}
-      <div ref={titleRef} className="text-center mb-16">
+      <div ref={titleRef} className="text-center mb-10 sm:mb-16">
         <motion.p
           initial={{ opacity: 0 }}
           animate={titleInView ? { opacity: 1 } : {}}
@@ -196,7 +266,7 @@ export default function GallerySection() {
           initial={{ opacity: 0, y: 20 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
-          className="font-playfair text-4xl md:text-5xl text-love-cream text-glow"
+          className="font-playfair text-3xl sm:text-4xl md:text-5xl text-love-cream text-glow"
         >
           Những khoảnh khắc của chúng mình
         </motion.h2>
@@ -209,7 +279,7 @@ export default function GallerySection() {
       </div>
 
       {/* Masonry grid */}
-      <div className="max-w-6xl mx-auto columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
+      <div className="max-w-6xl mx-auto columns-2 md:columns-2 lg:columns-3 gap-3 sm:gap-5 space-y-3 sm:space-y-5">
         {PHOTOS.map((photo, i) => (
           <div key={i} className="break-inside-avoid">
             <PhotoCard photo={photo} index={i} onClick={() => setLightboxIdx(i)} />
@@ -233,6 +303,8 @@ export default function GallerySection() {
         {lightboxIdx !== null && (
           <Lightbox
             photo={PHOTOS[lightboxIdx]}
+            index={lightboxIdx}
+            total={PHOTOS.length}
             onClose={() => setLightboxIdx(null)}
             onPrev={prev}
             onNext={next}

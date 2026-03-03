@@ -88,7 +88,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="glass rounded-full px-6 py-2 mb-8 text-love-rose font-cormorant text-lg tracking-widest uppercase"
+          className="glass rounded-full px-4 sm:px-6 py-2 mb-6 text-love-rose font-cormorant text-base sm:text-lg tracking-widest uppercase"
         >
           8 tháng 3 · Ngày của em
         </motion.div>
@@ -141,9 +141,9 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3, duration: 0.8 }}
-          className="glass rounded-2xl px-8 py-4 min-h-[60px] flex items-center justify-center mb-12"
+          className="glass rounded-2xl px-4 sm:px-8 py-4 min-h-[60px] flex items-center justify-center mb-10 w-full max-w-lg"
         >
-          <p className="font-dancing text-love-cream typewriter-cursor" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.4rem)' }}>
+          <p className="font-dancing text-love-cream typewriter-cursor text-center" style={{ fontSize: 'clamp(0.95rem, 3.5vw, 1.4rem)' }}>
             {typeText}
           </p>
         </motion.div>
@@ -153,7 +153,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="flex gap-4 mb-12 text-2xl"
+          className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10 text-xl sm:text-2xl"
         >
           {['💕', '🌸', '💖', '🌹', '💗', '✨', '💝'].map((e, i) => (
             <span

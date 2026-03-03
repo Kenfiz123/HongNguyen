@@ -33,6 +33,9 @@ export default function CursorTrail() {
     const container = containerRef.current
     if (!dot || !ring || !container) return
 
+    // Skip on touch/mobile devices — no mouse to track
+    if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return
+
     const onMove = (e: MouseEvent) => {
       const { clientX: x, clientY: y } = e
       mouseRef.current = { x, y }

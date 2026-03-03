@@ -80,13 +80,18 @@ export default function CanvasHearts() {
     resize()
     window.addEventListener('resize', resize)
 
+    // Reduce particle count on mobile for performance
+    const isMobile = window.innerWidth < 768
+    const heartCount = isMobile ? 12 : 25
+    const starCount = isMobile ? 60 : 120
+
     // Create initial hearts and stars
-    const hearts: Heart[] = Array.from({ length: 25 }, () => {
+    const hearts: Heart[] = Array.from({ length: heartCount }, () => {
       const h = createHeart(canvas)
       h.y = Math.random() * canvas.height // start scattered
       return h
     })
-    const stars: Star[] = Array.from({ length: 120 }, () => createStar(canvas))
+    const stars: Star[] = Array.from({ length: starCount }, () => createStar(canvas))
 
     let tick = 0
 
@@ -141,7 +146,8 @@ export default function CanvasHearts() {
       })
 
       // Occasionally add new hearts
-      if (tick % 90 === 0 && hearts.length < 40) {
+      const maxHearts = isMobile ? 18 : 40
+      if (tick % 90 === 0 && hearts.length < maxHearts) {
         hearts.push(createHeart(canvas))
       }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useCallback } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 // ── Customise here ──────────────────────────────────────────────────────────
@@ -12,21 +12,22 @@ const LOVE_DECLARATION = 'Anh yêu em! ❤️'
 
 async function launchFireworks() {
   const confetti = (await import('canvas-confetti')).default
+  const mobile = window.innerWidth < 768
 
-  const duration = 4000
+  const duration = mobile ? 2500 : 4000
   const end = Date.now() + duration
   const colors = ['#ff4d6d', '#ff85a1', '#ffd700', '#ffb3c6', '#ffffff']
 
   const frame = () => {
     confetti({
-      particleCount: 5,
+      particleCount: mobile ? 3 : 5,
       angle: 60,
       spread: 55,
       origin: { x: 0 },
       colors,
     })
     confetti({
-      particleCount: 5,
+      particleCount: mobile ? 3 : 5,
       angle: 120,
       spread: 55,
       origin: { x: 1 },
@@ -40,26 +41,28 @@ async function launchFireworks() {
   // Central burst
   setTimeout(() => {
     confetti({
-      particleCount: 120,
-      spread: 100,
+      particleCount: mobile ? 60 : 120,
+      spread: mobile ? 70 : 100,
       origin: { y: 0.5 },
       colors,
       shapes: ['circle' as const, 'square' as const],
-      scalar: 1.5,
+      scalar: mobile ? 1 : 1.5,
     })
   }, 500)
 
-  setTimeout(() => {
-    confetti({
-      particleCount: 80,
-      spread: 60,
-      origin: { y: 0.4, x: 0.5 },
-      colors,
-      startVelocity: 45,
-      shapes: ['circle' as const],
-      scalar: 2,
-    })
-  }, 1500)
+  if (!mobile) {
+    setTimeout(() => {
+      confetti({
+        particleCount: 80,
+        spread: 60,
+        origin: { y: 0.4, x: 0.5 },
+        colors,
+        startVelocity: 45,
+        shapes: ['circle' as const],
+        scalar: 2,
+      })
+    }, 1500)
+  }
 }
 
 function BigHeart() {
@@ -90,6 +93,11 @@ export default function FinalSection() {
   const inView = useInView(sectionRef, { once: true, margin: '-100px' })
   const [celebrated, setCelebrated] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
 
   const celebrate = useCallback(async () => {
     if (loading) return
@@ -103,11 +111,11 @@ export default function FinalSection() {
     <section
       id="final"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 overflow-hidden bg-final"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-16 sm:py-24 overflow-hidden bg-final"
     >
-      {/* Starfield */}
+      {/* Starfield — fewer on mobile */}
       <div className="absolute inset-0 pointer-events-none">
-        {Array.from({ length: 80 }).map((_, i) => (
+        {Array.from({ length: isMobile ? 30 : 80 }).map((_, i) => (
           <div
             key={i}
             className="absolute rounded-full bg-white animate-twinkle"
@@ -123,11 +131,11 @@ export default function FinalSection() {
         ))}
       </div>
 
-      {/* Floating emojis background */}
-      {['💕', '🌸', '✨', '💖', '🌹', '💫', '❤️', '💝'].map((emoji, i) => (
+      {/* Floating emojis background — fewer on mobile */}
+      {(isMobile ? ['💕', '✨', '💖', '❤️'] : ['💕', '🌸', '✨', '💖', '🌹', '💫', '❤️', '💝']).map((emoji, i) => (
         <motion.div
           key={i}
-          className="absolute text-3xl opacity-10 pointer-events-none"
+          className="absolute text-2xl sm:text-3xl opacity-10 pointer-events-none"
           style={{
             left: `${10 + (i * 11) % 80}%`,
             top: `${10 + (i * 13) % 80}%`,
@@ -148,13 +156,13 @@ export default function FinalSection() {
       ))}
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center text-center max-w-3xl w-full mx-auto">
         {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: -20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
-          className="font-cormorant text-love-rose/70 tracking-widest uppercase text-sm mb-6"
+          className="font-cormorant text-love-rose/70 tracking-widest uppercase text-xs sm:text-sm mb-6 w-full break-words"
         >
           {FINAL_SUBTITLE}
         </motion.p>
@@ -174,8 +182,8 @@ export default function FinalSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.6 }}
-          className="font-playfair font-bold mb-4 leading-tight"
-          style={{ fontSize: 'clamp(2.5rem, 7vw, 5rem)' }}
+          className="font-playfair font-bold mb-4 leading-tight w-full"
+          style={{ fontSize: 'clamp(1.6rem, 8vw, 5rem)' }}
         >
           <span className="shimmer-text">{FINAL_TITLE}</span>
         </motion.h2>
@@ -185,8 +193,8 @@ export default function FinalSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8 }}
-          className="font-dancing text-love-blush/90 mb-8 whitespace-pre-line"
-          style={{ fontSize: 'clamp(1.3rem, 3vw, 2rem)' }}
+          className="font-dancing text-love-blush/90 mb-8 whitespace-pre-line w-full"
+          style={{ fontSize: 'clamp(1rem, 4vw, 2rem)' }}
         >
           {FINAL_MESSAGE}
         </motion.p>
@@ -196,11 +204,11 @@ export default function FinalSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 1, type: 'spring' }}
-          className="glass-dark rounded-3xl px-10 py-6 mb-12 animate-border-glow"
+          className="glass-dark rounded-3xl px-6 sm:px-10 py-5 sm:py-6 mb-10 animate-border-glow w-full sm:w-auto"
         >
           <p
             className="font-dancing text-love-gold text-gold-glow"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
+            style={{ fontSize: 'clamp(1.5rem, 6vw, 3.5rem)' }}
           >
             {LOVE_DECLARATION}
           </p>
@@ -214,7 +222,7 @@ export default function FinalSection() {
           onClick={celebrate}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="relative px-10 py-4 rounded-full font-playfair text-white font-semibold text-lg overflow-hidden transition-all"
+          className="relative px-6 sm:px-10 py-4 rounded-full font-playfair text-white font-semibold text-base sm:text-lg overflow-hidden transition-all w-full sm:w-auto"
           style={{
             background: 'linear-gradient(135deg, #ff4d6d, #c9003a)',
             boxShadow: '0 0 30px rgba(255,77,109,0.4), 0 4px 20px rgba(0,0,0,0.3)',
@@ -236,7 +244,7 @@ export default function FinalSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 1.5 }}
-          className="flex gap-3 mt-12 text-2xl"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-8 sm:mt-12 text-xl sm:text-2xl"
         >
           {'💕🌸💕❤️💕🌸💕'.split('').map((c, i) => (
             <span key={i} className="animate-float-slow" style={{ animationDelay: `${i * 0.2}s` }}>
