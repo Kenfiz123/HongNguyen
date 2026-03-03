@@ -199,6 +199,29 @@ export default function FinalSection() {
           {FINAL_MESSAGE}
         </motion.p>
 
+        {/* 1-month anniversary milestone */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.9, type: 'spring' }}
+          className="flex items-center gap-3 sm:gap-4 rounded-2xl px-5 sm:px-8 py-3 sm:py-4 mb-6 w-full sm:w-auto"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255,215,0,0.08) 0%, rgba(255,77,109,0.08) 100%)',
+            border: '1px solid rgba(255,215,0,0.25)',
+          }}
+        >
+          <span className="text-2xl sm:text-3xl animate-heart-beat flex-shrink-0">🥂</span>
+          <div className="text-center flex-1">
+            <p className="font-cormorant text-love-gold/80 text-xs sm:text-sm tracking-widest uppercase mb-0.5">
+              Kỷ niệm · 7 tháng 3
+            </p>
+            <p className="font-dancing text-love-cream" style={{ fontSize: 'clamp(0.95rem, 3vw, 1.3rem)' }}>
+              Tròn 1 tháng bên nhau ❤️
+            </p>
+          </div>
+          <span className="text-2xl sm:text-3xl animate-heart-beat flex-shrink-0">🥂</span>
+        </motion.div>
+
         {/* Love declaration */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}

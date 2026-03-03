@@ -14,6 +14,7 @@ const SUB_MESSAGE = 'Dành tặng người con gái đặc biệt nhất trong c
 
 const TYPEWRITER_TEXTS = [
   'Em là điều tuyệt vời nhất đã xảy ra với anh ❤️',
+  '1 tháng bên nhau — mỗi ngày đều thật tuyệt 🥂',
   'Anh yêu em rất nhiều 💕',
   'Chúc em luôn hạnh phúc và rạng rỡ 🌸',
   'Em là ánh sáng trong cuộc đời anh ✨',
@@ -88,9 +89,25 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="glass rounded-full px-4 sm:px-6 py-2 mb-6 text-love-rose font-cormorant text-base sm:text-lg tracking-widest uppercase"
+          className="glass rounded-full px-4 sm:px-6 py-2 mb-3 text-love-rose font-cormorant text-base sm:text-lg tracking-widest uppercase"
         >
           8 tháng 3 · Ngày của em
+        </motion.div>
+
+        {/* 1-month anniversary badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.35, duration: 0.7, type: 'spring', bounce: 0.4 }}
+          className="flex items-center gap-2 rounded-full px-4 sm:px-5 py-1.5 mb-5 font-cormorant text-sm sm:text-base tracking-wider"
+          style={{
+            background: 'linear-gradient(90deg, rgba(255,215,0,0.12), rgba(255,133,161,0.12), rgba(255,215,0,0.12))',
+            border: '1px solid rgba(255,215,0,0.3)',
+          }}
+        >
+          <span className="animate-heart-beat text-base">🥂</span>
+          <span className="shimmer-text font-semibold">1 tháng yêu nhau · 7/3</span>
+          <span className="animate-heart-beat text-base">🥂</span>
         </motion.div>
 
         {/* Big heart */}

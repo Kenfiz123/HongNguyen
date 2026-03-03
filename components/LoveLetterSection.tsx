@@ -7,6 +7,7 @@ import { motion, useInView } from 'framer-motion'
 const LETTER_PARAGRAPHS = [
   'Em yêu,',
   'Ngày hôm nay, ngày 8 tháng 3, anh muốn nói với em điều mà trái tim anh vẫn luôn giữ mãi...',
+  'Và thật trùng hợp — hôm qua, ngày 7 tháng 3, là tròn đúng 1 tháng kể từ ngày chúng mình bắt đầu. Một tháng ngắn ngủi, nhưng với anh, mỗi ngày bên em đều thật đáng nhớ. 🥂',
   'Em là nguồn cảm hứng, là ánh sáng dịu dàng soi sáng mỗi ngày của anh. Nụ cười em làm tim anh rộn ràng, đôi mắt em là cả một bầu trời anh muốn lạc vào mãi mãi.',
   'Cảm ơn em vì đã xuất hiện trong cuộc đời này, cảm ơn em vì những khoảnh khắc bình yên, cảm ơn em vì đã là chính em — một người tuyệt vời và đặc biệt như vậy.',
   'Dù thời gian có trôi đi, dù cuộc đời có nhiều thăng trầm, anh vẫn luôn biết ơn vì có em bên cạnh. Em là điều kỳ diệu nhất anh từng có.',
