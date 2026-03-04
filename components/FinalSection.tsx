@@ -2,6 +2,19 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
+
+// Montage photos for the final section background
+const MONTAGE_PHOTOS = [
+  '/images/3f45bbf480140e4a570510.jpg',
+  '/images/515e6d1e54fedaa083ef27.jpg',
+  '/images/5bf6d9abe04b6e15375a28.jpg',
+  '/images/64ff33a40a44841add5530.jpg',
+  '/images/7db68924b3c43d9a64d524.jpg',
+  '/images/9295fe35c5d54b8b12c47.jpg',
+  '/images/96476e7a549adac4838b18.jpg',
+  '/images/a27aec31d6d1588f01c05.jpg',
+]
 
 // ── Customise here ──────────────────────────────────────────────────────────
 const FINAL_TITLE = 'Chúc mừng ngày 8/3'
@@ -154,6 +167,40 @@ export default function FinalSection() {
           {emoji}
         </motion.div>
       ))}
+
+      {/* Floating polaroid photos in background */}
+      {!isMobile && MONTAGE_PHOTOS.map((src, i) => {
+        const positions = [
+          { left: '3%', top: '8%', rotate: -12 },
+          { left: '85%', top: '5%', rotate: 8 },
+          { left: '5%', top: '45%', rotate: -8 },
+          { left: '88%', top: '40%', rotate: 15 },
+          { left: '2%', top: '75%', rotate: 6 },
+          { left: '82%', top: '72%', rotate: -10 },
+          { left: '12%', top: '25%', rotate: 12 },
+          { left: '78%', top: '85%', rotate: -6 },
+        ]
+        const pos = positions[i % positions.length]
+        return (
+          <motion.div
+            key={`montage-${i}`}
+            className="absolute pointer-events-none z-0"
+            style={{ left: pos.left, top: pos.top }}
+            initial={{ opacity: 0, scale: 0.6, rotate: pos.rotate }}
+            whileInView={{ opacity: 0.12, scale: 1, rotate: pos.rotate }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 + i * 0.15, duration: 1 }}
+          >
+            <motion.div
+              animate={{ y: [0, -8, 0], rotate: [pos.rotate, pos.rotate + 3, pos.rotate] }}
+              transition={{ repeat: Infinity, duration: 5 + i, ease: 'easeInOut' }}
+              className="relative w-20 h-24 rounded-lg overflow-hidden shadow-xl border-2 border-white/10"
+            >
+              <Image src={src} alt="" fill className="object-cover" sizes="80px" />
+            </motion.div>
+          </motion.div>
+        )
+      })}
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center max-w-3xl w-full mx-auto">

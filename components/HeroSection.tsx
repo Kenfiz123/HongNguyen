@@ -1,13 +1,24 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import dynamic from 'next/dynamic'
 
 const CanvasHearts = dynamic(() => import('./CanvasHearts'), { ssr: false })
 
+// Background slideshow images
+const HERO_IMAGES = [
+  '/images/017acb38f2d87c8625c926.jpg',
+  '/images/1f6666be5c5ed2008b4f19.jpg',
+  '/images/277454936e73e02db96221.jpg',
+  '/images/7b7f05233cc3b29debd229.jpg',
+  '/images/92b78327b9c737996ed625.jpg',
+  '/images/c15e8d88b7683936607920.jpg',
+]
+
 // ── Customise here ──────────────────────────────────────────────────────────
-const HER_NAME = 'Em Yêu'          // 💌 Thay tên người yêu tại đây
+const HER_NAME = 'Ngọc Hồng'          // 💌 Thay tên người yêu tại đây
 const MESSAGE = 'Chúc mừng ngày 8 tháng 3'
 const SUB_MESSAGE = 'Dành tặng người con gái đặc biệt nhất trong cuộc đời anh'
 // ────────────────────────────────────────────────────────────────────────────
@@ -61,29 +72,65 @@ const scrollDown = () => {
 export default function HeroSection() {
   const typeText = useTypewriter(TYPEWRITER_TEXTS)
   const [mounted, setMounted] = useState(false)
+  const [heroImgIdx, setHeroImgIdx] = useState(0)
 
   useEffect(() => { setMounted(true) }, [])
+
+  // Background image slideshow
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroImgIdx((prev) => (prev + 1) % HERO_IMAGES.length)
+    }, 6000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-hero"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
+      {/* Background photo slideshow */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={heroImgIdx}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 0.3, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          className="absolute inset-0 z-0"
+        >
+          <Image
+            src={HERO_IMAGES[heroImgIdx]}
+            alt="Background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Dark overlay on top of images */}
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 0%, rgba(255,77,109,0.15) 0%, transparent 60%), linear-gradient(to bottom, rgba(5,5,16,0.6), rgba(5,5,16,0.85))',
+        }}
+      />
       {/* Animated background canvas */}
-      {mounted && <CanvasHearts />}
+      <div className="z-[2]">{mounted && <CanvasHearts />}</div>
 
       {/* Radial vignette overlay */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-[3]"
         style={{
           background:
             'radial-gradient(ellipse at center, transparent 40%, rgba(5,5,16,0.7) 100%)',
-          zIndex: 1,
         }}
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl mx-auto">
+      <div className="relative z-[10] flex flex-col items-center text-center px-6 max-w-4xl mx-auto">
         {/* Date badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

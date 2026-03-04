@@ -2,6 +2,19 @@
 
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
+
+// Background photos for reason cards
+const REASON_PHOTOS = [
+  '/images/140189aeb24e3c10655f4.jpg',
+  '/images/189d9630add0238e7ac16.jpg',
+  '/images/1d85983ea3de2d8074cf8.jpg',
+  '/images/20b91ab42054ae0af74515.jpg',
+  '/images/2874592260c2ee9cb7d331.jpg',
+  '/images/2898690052e0dcbe85f13.jpg',
+  '/images/2c64d99be37b6d25346a23.jpg',
+  '/images/3d02c10bfbeb75b52cfa14.jpg',
+]
 
 // ── Customise here ──────────────────────────────────────────────────────────
 const REASONS = [
@@ -16,7 +29,7 @@ const REASONS = [
 ]
 // ────────────────────────────────────────────────────────────────────────────
 
-function ReasonCard({ reason, index }: { reason: (typeof REASONS)[0]; index: number }) {
+function ReasonCard({ reason, index, photo }: { reason: (typeof REASONS)[0]; index: number; photo: string }) {
   const [flipped, setFlipped] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
@@ -32,10 +45,10 @@ function ReasonCard({ reason, index }: { reason: (typeof REASONS)[0]; index: num
     >
       <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
         {/* Front */}
-        <div className="flip-card-front glass flex flex-col items-center justify-center p-6 cursor-pointer group">
+        <div className="flip-card-front glass flex flex-col items-center justify-center p-6 cursor-pointer group overflow-hidden">
           {/* Number */}
           <div
-            className="absolute top-3 right-4 font-playfair text-love-pink/30 font-bold"
+            className="absolute top-3 right-4 font-playfair text-love-pink/30 font-bold z-10"
             style={{ fontSize: '2.5rem' }}
           >
             {String(index + 1).padStart(2, '0')}
@@ -44,30 +57,32 @@ function ReasonCard({ reason, index }: { reason: (typeof REASONS)[0]; index: num
           <motion.div
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ repeat: Infinity, duration: 2, delay: index * 0.3 }}
-            className="text-5xl mb-3"
+            className="text-5xl mb-3 z-10"
           >
             {reason.emoji}
           </motion.div>
 
-          <h3 className="font-playfair text-love-cream text-center font-semibold text-sm md:text-base leading-tight">
+          <h3 className="font-playfair text-love-cream text-center font-semibold text-sm md:text-base leading-tight z-10">
             {reason.title}
           </h3>
 
-          <p className="text-love-rose/50 text-xs mt-2 font-cormorant">Nhấn để xem ❤️</p>
+          <p className="text-love-rose/50 text-xs mt-2 font-cormorant z-10">Nhấn để xem ❤️</p>
         </div>
 
-        {/* Back */}
+        {/* Back — with photo background */}
         <div
-          className="flip-card-back flex items-center justify-center p-4 sm:p-6 cursor-pointer"
+          className="flip-card-back flex items-center justify-center p-4 sm:p-6 cursor-pointer overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, rgba(255,77,109,0.15) 0%, rgba(13,0,21,0.95) 100%)',
             border: '1px solid rgba(255,77,109,0.3)',
           }}
         >
-          <div className="text-center">
+          {/* Photo background */}
+          <Image src={photo} alt="" fill className="object-cover opacity-25" sizes="200px" />
+          <div className="absolute inset-0 bg-gradient-to-t from-love-dark/95 via-love-dark/80 to-love-dark/60" />
+          <div className="text-center relative z-10">
             <div className="text-2xl mb-3">{reason.emoji}</div>
             <p className="font-dancing text-love-cream/90 leading-relaxed text-sm sm:text-base" style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1.05rem)' }}>
-              "{reason.desc}"
+              &quot;{reason.desc}&quot;
             </p>
             <div className="mt-3 text-love-pink text-lg">❤️</div>
           </div>
@@ -126,7 +141,7 @@ export default function ReasonsSection() {
       {/* Grid */}
       <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         {REASONS.map((reason, i) => (
-          <ReasonCard key={i} reason={reason} index={i} />
+          <ReasonCard key={i} reason={reason} index={i} photo={REASON_PHOTOS[i % REASON_PHOTOS.length]} />
         ))}
       </div>
 

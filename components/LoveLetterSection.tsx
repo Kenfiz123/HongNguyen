@@ -2,6 +2,17 @@
 
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
+
+// Photos for the side decorative strip
+const LETTER_PHOTOS = [
+  '/images/b28553826962e73cbe7316.jpg',
+  '/images/b9b3a20a99ea17b44efb9.jpg',
+  '/images/d6d0023438d4b68aefc522.jpg',
+  '/images/df22756c4f8cc1d2989d12.jpg',
+  '/images/f10c732b49cbc7959eda17.jpg',
+  '/images/f7b29f03a4e32abd73f211.jpg',
+]
 
 // ── Customise here ──────────────────────────────────────────────────────────
 const LETTER_PARAGRAPHS = [
@@ -14,7 +25,7 @@ const LETTER_PARAGRAPHS = [
   'Chúc em luôn hạnh phúc, luôn rạng rỡ, và biết rằng — anh yêu em rất nhiều. 💕',
   'Mãi mãi của em,',
 ]
-const SENDER_NAME = 'Người yêu em ❤️'   // 💌 Thay tên người gửi tại đây
+const SENDER_NAME = 'KenFi ❤️'   // 💌 Thay tên người gửi tại đây
 // ────────────────────────────────────────────────────────────────────────────
 
 function useTypewriterParagraph(text: string, active: boolean, speed = 30) {
@@ -188,6 +199,35 @@ export default function LoveLetterSection() {
               >
                 {c}
               </span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Photo memories strip under the letter */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-10 sm:mt-14"
+        >
+          <p className="text-center font-cormorant text-love-rose/50 text-sm tracking-widest uppercase mb-4">
+            Khoảnh khắc đáng nhớ ✨
+          </p>
+          <div className="flex gap-2 sm:gap-3 justify-center overflow-hidden">
+            {LETTER_PHOTOS.map((src, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20, rotate: (i % 2 === 0 ? -5 : 5) }}
+                whileInView={{ opacity: 1, y: 0, rotate: (i % 2 === 0 ? -3 : 3) }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 + i * 0.1, duration: 0.6 }}
+                whileHover={{ scale: 1.1, rotate: 0, zIndex: 10 }}
+                className="relative w-16 h-20 sm:w-24 sm:h-32 rounded-lg overflow-hidden shadow-lg border border-love-pink/20 flex-shrink-0 cursor-pointer"
+              >
+                <Image src={src} alt="" fill className="object-cover" sizes="96px" />
+                <div className="absolute inset-0 bg-love-dark/20 hover:bg-transparent transition-colors duration-300" />
+              </motion.div>
             ))}
           </div>
         </motion.div>
