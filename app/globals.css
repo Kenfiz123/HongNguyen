@@ -311,26 +311,31 @@ body {
 
 /* ── Mobile optimizations ─────────────────────── */
 @media (max-width: 640px) {
+  /* Use dvh for full-height sections on mobile */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   /* Reduce glow intensity on mobile for performance */
   .text-glow {
-    text-shadow: 0 0 12px rgba(255, 77, 109, 0.5),
-                 0 0 24px rgba(255, 77, 109, 0.2);
+    text-shadow: 0 0 10px rgba(255, 77, 109, 0.4),
+                 0 0 20px rgba(255, 77, 109, 0.15);
   }
 
   .text-gold-glow {
-    text-shadow: 0 0 12px rgba(255, 215, 0, 0.5),
-                 0 0 24px rgba(255, 215, 0, 0.2);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4),
+                 0 0 20px rgba(255, 215, 0, 0.15);
   }
 
   /* Reduce glass blur on mobile for GPU performance */
   .glass {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   .glass-dark {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   /* Reduce border glow animation intensity */
@@ -340,7 +345,23 @@ body {
 
   /* Smaller heart SVG glow on mobile */
   .heart-svg {
-    filter: drop-shadow(0 0 6px rgba(255, 77, 109, 0.5));
+    filter: drop-shadow(0 0 4px rgba(255, 77, 109, 0.4));
+  }
+
+  /* Reduce shimmer animation complexity */
+  .shimmer-text {
+    background-size: 300% auto;
+    animation: shimmerText 5s linear infinite;
+  }
+
+  /* Smoother animations on low-end devices */
+  .animate-float-slow {
+    animation-duration: 5s;
+  }
+
+  /* Reduce glow pulse intensity */
+  .animate-glow {
+    animation: glowPulse 3s ease-in-out infinite;
   }
 }
 

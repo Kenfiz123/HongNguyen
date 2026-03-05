@@ -64,8 +64,8 @@ function LetterParagraph({ text, delay, once }: { text: string; delay: number; o
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ delay: delay * 0.1 }}
-        className="font-dancing text-love-cream/90 leading-relaxed mb-6"
-        style={{ fontSize: 'clamp(1rem, 3.5vw, 1.5rem)', minHeight: '2em' }}
+        className="font-dancing text-love-cream/90 leading-relaxed mb-4 sm:mb-6"
+        style={{ fontSize: 'clamp(0.9rem, 3.2vw, 1.5rem)', minHeight: '1.8em' }}
       >
         {active ? displayed : ''}
         {!active && text}
@@ -97,7 +97,7 @@ export default function LoveLetterSection() {
     <section
       id="love-letter"
       ref={sectionRef}
-      className="relative py-16 sm:py-24 px-4 sm:px-6 bg-letter overflow-hidden"
+      className="relative py-12 sm:py-24 px-3 sm:px-6 bg-letter overflow-hidden"
     >
       {/* Floating petals background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -124,15 +124,15 @@ export default function LoveLetterSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
-        className="text-center mb-10 sm:mb-16"
+        className="text-center mb-8 sm:mb-16"
       >
-        <p className="font-cormorant text-love-rose/70 tracking-widest uppercase text-sm mb-3">
+        <p className="font-cormorant text-love-rose/70 tracking-widest uppercase text-xs sm:text-sm mb-2 sm:mb-3">
           — Thư tình —
         </p>
-        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-love-cream text-glow">
+        <h2 className="font-playfair text-2xl sm:text-4xl md:text-5xl text-love-cream text-glow">
           Anh muốn nói với em...
         </h2>
-        <div className="flex justify-center gap-2 mt-4 text-xl">
+        <div className="flex justify-center gap-1.5 sm:gap-2 mt-3 sm:mt-4 text-lg sm:text-xl">
           {'❤️🌸💕🌸❤️'.split('').map((c, i) => (
             <span key={i}>{c}</span>
           ))}
@@ -146,7 +146,7 @@ export default function LoveLetterSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative rounded-3xl p-5 sm:p-8 md:p-14 animate-border-glow"
+          className="relative rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-14 animate-border-glow"
           style={{
             background:
               'linear-gradient(145deg, rgba(255,77,109,0.06) 0%, rgba(13,0,21,0.9) 50%, rgba(255,133,161,0.06) 100%)',
@@ -160,8 +160,8 @@ export default function LoveLetterSection() {
           <div className="absolute bottom-4 right-4 text-love-rose/30 text-xl sm:text-3xl select-none -rotate-90 hidden sm:block">❦</div>
 
           {/* Opening decoration */}
-          <div className="text-center mb-6 sm:mb-10">
-            <div className="text-4xl sm:text-5xl animate-heart-beat">💌</div>
+          <div className="text-center mb-4 sm:mb-10">
+            <div className="text-3xl sm:text-5xl animate-heart-beat">💌</div>
           </div>
 
           {/* Letter paragraphs */}
@@ -209,12 +209,12 @@ export default function LoveLetterSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-10 sm:mt-14"
+          className="mt-8 sm:mt-14"
         >
-          <p className="text-center font-cormorant text-love-rose/50 text-sm tracking-widest uppercase mb-4">
+          <p className="text-center font-cormorant text-love-rose/50 text-xs sm:text-sm tracking-widest uppercase mb-3 sm:mb-4">
             Khoảnh khắc đáng nhớ ✨
           </p>
-          <div className="flex gap-2 sm:gap-3 justify-center overflow-hidden">
+          <div className="flex gap-1.5 sm:gap-3 justify-center overflow-x-auto no-scrollbar px-2">
             {LETTER_PHOTOS.map((src, i) => (
               <motion.div
                 key={i}
@@ -223,7 +223,7 @@ export default function LoveLetterSection() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 + i * 0.1, duration: 0.6 }}
                 whileHover={{ scale: 1.1, rotate: 0, zIndex: 10 }}
-                className="relative w-16 h-20 sm:w-24 sm:h-32 rounded-lg overflow-hidden shadow-lg border border-love-pink/20 flex-shrink-0 cursor-pointer"
+                className="relative w-14 h-18 sm:w-24 sm:h-32 rounded-lg overflow-hidden shadow-lg border border-love-pink/20 flex-shrink-0 cursor-pointer"
               >
                 <Image src={src} alt="" fill className="object-cover" sizes="96px" />
                 <div className="absolute inset-0 bg-love-dark/20 hover:bg-transparent transition-colors duration-300" />

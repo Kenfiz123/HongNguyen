@@ -111,7 +111,7 @@ function PhotoCard({
       animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{ duration: 0.6, delay: (layoutIndex % 4) * 0.1, ease: 'easeOut' }}
       onClick={onClick}
-      className={`relative overflow-hidden rounded-2xl cursor-pointer group ${aspectClass}`}
+      className={`relative overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer group ${aspectClass}`}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
     >
@@ -119,8 +119,9 @@ function PhotoCard({
         src={photo.src}
         alt={photo.caption}
         fill
-        className="object-cover transition-transform duration-700 group-hover:scale-110"
+        className="object-cover transition-transform duration-500 group-hover:scale-110"
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        loading="lazy"
       />
 
       {/* Hover overlay gradient */}
@@ -224,7 +225,7 @@ function Lightbox({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
       style={{ background: 'rgba(5,5,16,0.97)' }}
       onClick={onClose}
       onTouchStart={handleTouchStart}
@@ -240,7 +241,7 @@ function Lightbox({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Main image */}
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-love-pink/20">
+        <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shadow-love-pink/20">
           <AnimatePresence mode="wait">
             <motion.div
               key={photo.src}
@@ -254,21 +255,21 @@ function Lightbox({
                 alt={photo.caption}
                 width={1200}
                 height={900}
-                className="w-full h-auto max-h-[70vh] sm:max-h-[75vh] object-contain"
+                className="w-full h-auto max-h-[60vh] sm:max-h-[75vh] object-contain"
               />
             </motion.div>
           </AnimatePresence>
         </div>
 
         {/* Caption + counter */}
-        <div className="text-center mt-4 px-12">
+        <div className="text-center mt-3 sm:mt-4 px-4 sm:px-12">
           <AnimatePresence mode="wait">
             <motion.p
               key={photo.caption}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="font-dancing text-love-cream text-lg sm:text-xl"
+              className="font-dancing text-love-cream text-base sm:text-xl"
             >
               {photo.caption}
             </motion.p>
@@ -352,7 +353,7 @@ function PhotoRibbon({ images, reverse = false }: { images: string[]; reverse?: 
         transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
       >
         {[...images, ...images].map((img, i) => (
-          <div key={i} className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden flex-shrink-0">
+          <div key={i} className="relative w-16 h-16 sm:w-24 sm:h-24 rounded-lg sm:rounded-xl overflow-hidden flex-shrink-0">
             <Image src={`/images/${img}`} alt="" fill className="object-cover" sizes="96px" />
             <div className="absolute inset-0 bg-love-dark/30" />
           </div>
@@ -398,7 +399,7 @@ export default function GallerySection() {
   }, [])
 
   return (
-    <section id="gallery" className="relative py-16 sm:py-24 px-4 sm:px-6 bg-love-dark overflow-hidden">
+    <section id="gallery" className="relative py-12 sm:py-24 px-3 sm:px-6 bg-love-dark overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(255,77,109,0.06) 0%, transparent 60%)' }}
@@ -413,11 +414,11 @@ export default function GallerySection() {
       </div>
 
       {/* Title */}
-      <div ref={titleRef} className="text-center mb-10 sm:mb-14">
+      <div ref={titleRef} className="text-center mb-8 sm:mb-14">
         <motion.p
           initial={{ opacity: 0 }}
           animate={titleInView ? { opacity: 1 } : {}}
-          className="font-cormorant text-love-rose/70 tracking-widest uppercase text-sm mb-3"
+          className="font-cormorant text-love-rose/70 tracking-widest uppercase text-xs sm:text-sm mb-2 sm:mb-3"
         >
           — Kỷ niệm —
         </motion.p>
@@ -425,7 +426,7 @@ export default function GallerySection() {
           initial={{ opacity: 0, y: 20 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
-          className="font-playfair text-3xl sm:text-4xl md:text-5xl text-love-cream text-glow"
+          className="font-playfair text-2xl sm:text-4xl md:text-5xl text-love-cream text-glow"
         >
           Ảnh Vợ Yêu
         </motion.h2>
@@ -433,7 +434,7 @@ export default function GallerySection() {
           initial={{ opacity: 0 }}
           animate={titleInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
-          className="font-cormorant text-love-blush/50 mt-3 text-lg"
+          className="font-cormorant text-love-blush/50 mt-2 sm:mt-3 text-base sm:text-lg"
         >
           {ALL_IMAGES.length} bức ảnh · {ALL_IMAGES.length} kỷ niệm
         </motion.p>
@@ -441,12 +442,12 @@ export default function GallerySection() {
           initial={{ scaleX: 0 }}
           animate={titleInView ? { scaleX: 1 } : {}}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="h-px w-48 mx-auto mt-6 bg-gradient-to-r from-transparent via-love-pink to-transparent"
+          className="h-px w-32 sm:w-48 mx-auto mt-4 sm:mt-6 bg-gradient-to-r from-transparent via-love-pink to-transparent"
         />
       </div>
 
       {/* Masonry grid — all photos */}
-      <div className="max-w-6xl mx-auto columns-2 md:columns-3 lg:columns-4 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
+      <div className="max-w-6xl mx-auto columns-2 md:columns-3 lg:columns-4 gap-2 sm:gap-4 space-y-2 sm:space-y-4">
         <AnimatePresence>
           {displayedPhotos.map((photo, i) => (
             <div key={photo.index} className="break-inside-avoid">
@@ -472,7 +473,7 @@ export default function GallerySection() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowAll(true)}
-            className="px-8 py-3 rounded-full font-cormorant text-love-cream text-lg tracking-wider border border-love-pink/40 hover:bg-love-pink/10 transition-all duration-300"
+            className="px-6 sm:px-8 py-3 rounded-full font-cormorant text-love-cream text-base sm:text-lg tracking-wider border border-love-pink/40 hover:bg-love-pink/10 transition-all duration-300 w-full sm:w-auto"
             style={{
               background: 'linear-gradient(135deg, rgba(255,77,109,0.08), rgba(255,133,161,0.08))',
             }}

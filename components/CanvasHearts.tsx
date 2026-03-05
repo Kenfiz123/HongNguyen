@@ -82,8 +82,9 @@ export default function CanvasHearts() {
 
     // Reduce particle count on mobile for performance
     const isMobile = window.innerWidth < 768
-    const heartCount = isMobile ? 12 : 25
-    const starCount = isMobile ? 60 : 120
+    const heartCount = isMobile ? 8 : 25
+    const starCount = isMobile ? 40 : 120
+    const stepSize = isMobile ? 0.1 : 0.05
 
     // Create initial hearts and stars
     const hearts: Heart[] = Array.from({ length: heartCount }, () => {
@@ -132,9 +133,9 @@ export default function CanvasHearts() {
         ctx.rotate(h.rotation)
         ctx.fillStyle = h.color
         ctx.shadowColor = h.color
-        ctx.shadowBlur = 8
+        ctx.shadowBlur = isMobile ? 4 : 8
         ctx.beginPath()
-        for (let t = 0; t <= Math.PI * 2; t += 0.05) {
+        for (let t = 0; t <= Math.PI * 2; t += stepSize) {
           const hx = 16 * Math.pow(Math.sin(t), 3)
           const hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t))
           if (t === 0) ctx.moveTo((hx * h.size) / 16, (hy * h.size) / 16)

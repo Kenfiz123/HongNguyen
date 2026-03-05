@@ -82,7 +82,7 @@ function BigHeart() {
   return (
     <svg
       viewBox="0 0 100 90"
-      className="w-40 h-40 md:w-56 md:h-56 heart-svg animate-heart-beat"
+      className="w-28 h-28 sm:w-40 sm:h-40 md:w-56 md:h-56 heart-svg animate-heart-beat"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -124,7 +124,7 @@ export default function FinalSection() {
     <section
       id="final"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-16 sm:py-24 overflow-hidden bg-final"
+      className="relative min-h-[100dvh] flex flex-col items-center justify-center px-3 sm:px-6 py-12 sm:py-24 overflow-hidden bg-final"
     >
       {/* Starfield — fewer on mobile */}
       <div className="absolute inset-0 pointer-events-none">
@@ -209,7 +209,7 @@ export default function FinalSection() {
           initial={{ opacity: 0, y: -20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
-          className="font-cormorant text-love-rose/70 tracking-widest uppercase text-xs sm:text-sm mb-6 w-full break-words"
+          className="font-cormorant text-love-rose/70 tracking-widest uppercase text-[10px] sm:text-sm mb-4 sm:mb-6 w-full break-words"
         >
           {FINAL_SUBTITLE}
         </motion.p>
@@ -219,7 +219,7 @@ export default function FinalSection() {
           initial={{ scale: 0, rotate: -15 }}
           animate={inView ? { scale: 1, rotate: 0 } : {}}
           transition={{ delay: 0.4, type: 'spring', bounce: 0.5 }}
-          className="mb-8"
+          className="mb-5 sm:mb-8"
         >
           <BigHeart />
         </motion.div>
@@ -229,8 +229,8 @@ export default function FinalSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.6 }}
-          className="font-playfair font-bold mb-4 leading-tight w-full"
-          style={{ fontSize: 'clamp(1.6rem, 8vw, 5rem)' }}
+          className="font-playfair font-bold mb-3 sm:mb-4 leading-tight w-full"
+          style={{ fontSize: 'clamp(1.5rem, 7vw, 5rem)' }}
         >
           <span className="shimmer-text">{FINAL_TITLE}</span>
         </motion.h2>
@@ -240,8 +240,8 @@ export default function FinalSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8 }}
-          className="font-dancing text-love-blush/90 mb-8 whitespace-pre-line w-full"
-          style={{ fontSize: 'clamp(1rem, 4vw, 2rem)' }}
+          className="font-dancing text-love-blush/90 mb-5 sm:mb-8 whitespace-pre-line w-full"
+          style={{ fontSize: 'clamp(0.95rem, 3.5vw, 2rem)' }}
         >
           {FINAL_MESSAGE}
         </motion.p>
@@ -251,22 +251,22 @@ export default function FinalSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.9, type: 'spring' }}
-          className="flex items-center gap-3 sm:gap-4 rounded-2xl px-5 sm:px-8 py-3 sm:py-4 mb-6 w-full sm:w-auto"
+          className="flex items-center gap-2 sm:gap-4 rounded-xl sm:rounded-2xl px-4 sm:px-8 py-2.5 sm:py-4 mb-5 sm:mb-6 w-full sm:w-auto"
           style={{
             background: 'linear-gradient(135deg, rgba(255,215,0,0.08) 0%, rgba(255,77,109,0.08) 100%)',
             border: '1px solid rgba(255,215,0,0.25)',
           }}
         >
-          <span className="text-2xl sm:text-3xl animate-heart-beat flex-shrink-0">🥂</span>
+          <span className="text-xl sm:text-3xl animate-heart-beat flex-shrink-0">🥂</span>
           <div className="text-center flex-1">
-            <p className="font-cormorant text-love-gold/80 text-xs sm:text-sm tracking-widest uppercase mb-0.5">
+            <p className="font-cormorant text-love-gold/80 text-[10px] sm:text-sm tracking-widest uppercase mb-0.5">
               Kỷ niệm · 7 tháng 3
             </p>
-            <p className="font-dancing text-love-cream" style={{ fontSize: 'clamp(0.95rem, 3vw, 1.3rem)' }}>
+            <p className="font-dancing text-love-cream" style={{ fontSize: 'clamp(0.85rem, 3vw, 1.3rem)' }}>
               Tròn 1 tháng bên nhau ❤️
             </p>
           </div>
-          <span className="text-2xl sm:text-3xl animate-heart-beat flex-shrink-0">🥂</span>
+          <span className="text-xl sm:text-3xl animate-heart-beat flex-shrink-0">🥂</span>
         </motion.div>
 
         {/* Love declaration */}
@@ -274,11 +274,11 @@ export default function FinalSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 1, type: 'spring' }}
-          className="glass-dark rounded-3xl px-6 sm:px-10 py-5 sm:py-6 mb-10 animate-border-glow w-full sm:w-auto"
+          className="glass-dark rounded-2xl sm:rounded-3xl px-5 sm:px-10 py-4 sm:py-6 mb-6 sm:mb-10 animate-border-glow w-full sm:w-auto"
         >
           <p
             className="font-dancing text-love-gold text-gold-glow"
-            style={{ fontSize: 'clamp(1.5rem, 6vw, 3.5rem)' }}
+            style={{ fontSize: 'clamp(1.3rem, 5vw, 3.5rem)' }}
           >
             {LOVE_DECLARATION}
           </p>
@@ -292,7 +292,7 @@ export default function FinalSection() {
           onClick={celebrate}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="relative px-6 sm:px-10 py-4 rounded-full font-playfair text-white font-semibold text-base sm:text-lg overflow-hidden transition-all w-full sm:w-auto"
+          className="relative px-5 sm:px-10 py-3 sm:py-4 rounded-full font-playfair text-white font-semibold text-sm sm:text-lg overflow-hidden transition-all w-full sm:w-auto"
           style={{
             background: 'linear-gradient(135deg, #ff4d6d, #c9003a)',
             boxShadow: '0 0 30px rgba(255,77,109,0.4), 0 4px 20px rgba(0,0,0,0.3)',
@@ -314,7 +314,7 @@ export default function FinalSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 1.5 }}
-          className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-8 sm:mt-12 text-xl sm:text-2xl"
+          className="flex flex-wrap justify-center gap-1.5 sm:gap-3 mt-6 sm:mt-12 text-lg sm:text-2xl"
         >
           {'💕🌸💕❤️💕🌸💕'.split('').map((c, i) => (
             <span key={i} className="animate-float-slow" style={{ animationDelay: `${i * 0.2}s` }}>
@@ -328,7 +328,7 @@ export default function FinalSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 1.8 }}
-          className="font-cormorant text-love-rose/30 text-sm mt-12 tracking-widest"
+          className="font-cormorant text-love-rose/30 text-xs sm:text-sm mt-8 sm:mt-12 tracking-widest"
         >
           Made with ❤️ for you · 8/3/2026
         </motion.p>

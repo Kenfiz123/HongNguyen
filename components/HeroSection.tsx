@@ -87,7 +87,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background photo slideshow */}
       <AnimatePresence mode="wait">
@@ -130,13 +130,13 @@ export default function HeroSection() {
       />
 
       {/* Content */}
-      <div className="relative z-[10] flex flex-col items-center text-center px-6 max-w-4xl mx-auto">
+      <div className="relative z-[10] flex flex-col items-center text-center px-4 sm:px-6 max-w-4xl mx-auto w-full">
         {/* Date badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="glass rounded-full px-4 sm:px-6 py-2 mb-3 text-love-rose font-cormorant text-base sm:text-lg tracking-widest uppercase"
+          className="glass rounded-full px-3 sm:px-6 py-1.5 sm:py-2 mb-2 sm:mb-3 text-love-rose font-cormorant text-sm sm:text-lg tracking-widest uppercase"
         >
           8 tháng 3 · Ngày của em
         </motion.div>
@@ -146,15 +146,15 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.35, duration: 0.7, type: 'spring', bounce: 0.4 }}
-          className="flex items-center gap-2 rounded-full px-4 sm:px-5 py-1.5 mb-5 font-cormorant text-sm sm:text-base tracking-wider"
+          className="flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-5 py-1 sm:py-1.5 mb-4 sm:mb-5 font-cormorant text-xs sm:text-base tracking-wider"
           style={{
             background: 'linear-gradient(90deg, rgba(255,215,0,0.12), rgba(255,133,161,0.12), rgba(255,215,0,0.12))',
             border: '1px solid rgba(255,215,0,0.3)',
           }}
         >
-          <span className="animate-heart-beat text-base">🥂</span>
+          <span className="animate-heart-beat text-sm sm:text-base">🥂</span>
           <span className="shimmer-text font-semibold">1 tháng yêu nhau · 7/3</span>
-          <span className="animate-heart-beat text-base">🥂</span>
+          <span className="animate-heart-beat text-sm sm:text-base">🥂</span>
         </motion.div>
 
         {/* Big heart */}
@@ -162,7 +162,7 @@ export default function HeroSection() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8, type: 'spring', bounce: 0.5 }}
-          className="text-8xl mb-4 animate-heart-beat"
+          className="text-5xl sm:text-8xl mb-3 sm:mb-4 animate-heart-beat"
         >
           ❤️
         </motion.div>
@@ -172,8 +172,8 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 1 }}
-          className="font-playfair font-bold leading-tight mb-4"
-          style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)' }}
+          className="font-playfair font-bold leading-tight mb-3 sm:mb-4"
+          style={{ fontSize: 'clamp(1.8rem, 7vw, 6rem)' }}
         >
           <span className="shimmer-text">{MESSAGE}</span>
         </motion.h1>
@@ -183,8 +183,8 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9, duration: 1 }}
-          className="font-dancing text-love-rose mb-6 animate-glow"
-          style={{ fontSize: 'clamp(1.8rem, 5vw, 3.5rem)' }}
+          className="font-dancing text-love-rose mb-4 sm:mb-6 animate-glow"
+          style={{ fontSize: 'clamp(1.5rem, 5vw, 3.5rem)' }}
         >
           {HER_NAME}
         </motion.h2>
@@ -194,8 +194,8 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 1 }}
-          className="font-cormorant text-love-blush/80 mb-10 max-w-lg"
-          style={{ fontSize: 'clamp(1rem, 2.5vw, 1.3rem)' }}
+          className="font-cormorant text-love-blush/80 mb-6 sm:mb-10 max-w-lg px-2"
+          style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1.3rem)' }}
         >
           {SUB_MESSAGE}
         </motion.p>
@@ -205,9 +205,9 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3, duration: 0.8 }}
-          className="glass rounded-2xl px-4 sm:px-8 py-4 min-h-[60px] flex items-center justify-center mb-10 w-full max-w-lg"
+          className="glass rounded-2xl px-3 sm:px-8 py-3 sm:py-4 min-h-[50px] sm:min-h-[60px] flex items-center justify-center mb-6 sm:mb-10 w-full max-w-lg"
         >
-          <p className="font-dancing text-love-cream typewriter-cursor text-center" style={{ fontSize: 'clamp(0.95rem, 3.5vw, 1.4rem)' }}>
+          <p className="font-dancing text-love-cream typewriter-cursor text-center" style={{ fontSize: 'clamp(0.85rem, 3.5vw, 1.4rem)' }}>
             {typeText}
           </p>
         </motion.div>
@@ -217,7 +217,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10 text-xl sm:text-2xl"
+          className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-10 text-lg sm:text-2xl"
         >
           {['💕', '🌸', '💖', '🌹', '💗', '✨', '💝'].map((e, i) => (
             <span
@@ -236,13 +236,13 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.7, duration: 0.8 }}
           onClick={scrollDown}
-          className="flex flex-col items-center gap-2 text-love-rose/70 hover:text-love-rose transition-colors group"
+          className="flex flex-col items-center gap-1.5 sm:gap-2 text-love-rose/70 hover:text-love-rose transition-colors group"
         >
-          <span className="font-cormorant text-sm tracking-widest uppercase">Khám phá</span>
+          <span className="font-cormorant text-xs sm:text-sm tracking-widest uppercase">Khám phá</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-            className="text-2xl"
+            className="text-xl sm:text-2xl"
           >
             ↓
           </motion.div>
