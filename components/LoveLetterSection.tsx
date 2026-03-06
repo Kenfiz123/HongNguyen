@@ -17,12 +17,12 @@ const LETTER_PHOTOS = [
 // ── Customise here ──────────────────────────────────────────────────────────
 const LETTER_PARAGRAPHS = [
   'Em yêu,',
-  'Ngày hôm nay, ngày 8 tháng 3, anh muốn nói với em điều mà trái tim anh vẫn luôn giữ mãi...',
-  'Và thật trùng hợp — hôm qua, ngày 7 tháng 3, là tròn đúng 1 tháng kể từ ngày chúng mình bắt đầu. Một tháng ngắn ngủi, nhưng với anh, mỗi ngày bên em đều thật đáng nhớ. 🥂',
-  'Em là nguồn cảm hứng, là ánh sáng dịu dàng soi sáng mỗi ngày của anh. Nụ cười em làm tim anh rộn ràng, đôi mắt em là cả một bầu trời anh muốn lạc vào mãi mãi.',
-  'Cảm ơn em vì đã xuất hiện trong cuộc đời này, cảm ơn em vì những khoảnh khắc bình yên, cảm ơn em vì đã là chính em — một người tuyệt vời và đặc biệt như vậy.',
-  'Dù thời gian có trôi đi, dù cuộc đời có nhiều thăng trầm, anh vẫn luôn biết ơn vì có em bên cạnh. Em là điều kỳ diệu nhất anh từng có.',
-  'Chúc em luôn hạnh phúc, luôn rạng rỡ, và biết rằng — anh yêu em rất nhiều. 💕',
+  'Hôm nay, ngày 7 tháng 3 — tròn đúng 1 tháng kể từ ngày chúng mình bắt đầu. Anh ngồi đây, nhớ lại từng khoảnh khắc bên em, và tim anh lại rộn lên theo cách mà anh không tài nào giải thích được. 🥂',
+  'Một tháng. Chỉ 30 ngày thôi, nhưng với anh, mỗi ngày có em đều dài hơn, ý nghĩa hơn, và đẹp hơn bất kỳ ngày nào trước đó. Em xuất hiện và làm thay đổi mọi thứ — nhẹ nhàng, tự nhiên, như thể em luôn ở đó.',
+  'Anh yêu cái cách em cười khi anh nói điều gì đó ngốc nghếch. Anh yêu ánh mắt em khi em đang mải nghĩ về điều gì đó. Anh yêu cả những lúc em giả vờ giận mà vẫn không nhịn được cười. Mỗi chi tiết nhỏ đó — anh nhớ hết, và trân trọng từng cái một.',
+  'Cảm ơn em vì đã tin tưởng anh, vì đã cho anh được ở bên em, vì đã là chính em — chân thật, dịu dàng và đặc biệt đến vậy. Được yêu em là điều anh thấy may mắn nhất trong năm nay.',
+  'Một tháng rồi — và anh biết chắc rằng anh muốn còn rất nhiều tháng nữa bên em. Anh không cần nói nhiều, chỉ cần em biết: trong trái tim anh, chỗ của em chưa bao giờ lung lay.',
+  'Anh yêu em — hôm qua, hôm nay, và tất cả những ngày sau này. 💕',
   'Mãi mãi của em,',
 ]
 const SENDER_NAME = 'KenFi ❤️'   // 💌 Thay tên người gửi tại đây
