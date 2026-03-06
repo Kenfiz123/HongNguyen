@@ -269,11 +269,34 @@ export default function FinalSection() {
           <span className="text-xl sm:text-3xl animate-heart-beat flex-shrink-0">🥂</span>
         </motion.div>
 
+        {/* 8/3 Women's Day greeting */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 1.0, type: 'spring' }}
+          className="flex items-center gap-2 sm:gap-4 rounded-xl sm:rounded-2xl px-4 sm:px-8 py-2.5 sm:py-4 mb-5 sm:mb-6 w-full sm:w-auto"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255,77,109,0.08) 0%, rgba(255,133,161,0.1) 100%)',
+            border: '1px solid rgba(255,133,161,0.3)',
+          }}
+        >
+          <span className="text-xl sm:text-3xl animate-float-slow flex-shrink-0">🌸</span>
+          <div className="text-center flex-1">
+            <p className="font-cormorant text-love-rose/80 text-[10px] sm:text-sm tracking-widest uppercase mb-0.5">
+              Ngày Quốc tế Phụ nữ · 8 tháng 3
+            </p>
+            <p className="font-dancing text-love-cream" style={{ fontSize: 'clamp(0.85rem, 3vw, 1.3rem)' }}>
+              Chúc em luôn hạnh phúc & rạng rỡ! 🌺
+            </p>
+          </div>
+          <span className="text-xl sm:text-3xl animate-float-slow flex-shrink-0" style={{ animationDelay: '1s' }}>🌸</span>
+        </motion.div>
+
         {/* Love declaration */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ delay: 1, type: 'spring' }}
+          transition={{ delay: 1.1, type: 'spring' }}
           className="glass-dark rounded-2xl sm:rounded-3xl px-5 sm:px-10 py-4 sm:py-6 mb-6 sm:mb-10 animate-border-glow w-full sm:w-auto"
         >
           <p
