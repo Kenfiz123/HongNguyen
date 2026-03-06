@@ -18,7 +18,7 @@ const LETTER_PHOTOS = [
 const LETTER_PARAGRAPHS = [
   'Em yêu,',
   'Hôm nay, ngày 7 tháng 3 — tròn đúng 1 tháng kể từ ngày chúng mình bắt đầu. Anh ngồi đây, nhớ lại từng khoảnh khắc bên em, và tim anh lại rộn lên theo cách mà anh không tài nào giải thích được. 🥂',
-  'Một tháng. Chỉ 30 ngày thôi, nhưng với anh, mỗi ngày có em đều dài hơn, ý nghĩa hơn, và đẹp hơn bất kỳ ngày nào trước đó. Em xuất hiện và làm thay đổi mọi thứ — nhẹ nhàng, tự nhiên, như thể em luôn ở đó.',
+  'Một tháng bên em — mỗi ngày đều dài hơn, ý nghĩa hơn, và đẹp hơn bất kỳ ngày nào trước đó. Em xuất hiện và làm thay đổi mọi thứ — nhẹ nhàng, tự nhiên, như thể em luôn ở đó.',
   'Anh yêu cái cách em cười khi anh nói điều gì đó ngốc nghếch. Anh yêu ánh mắt em khi em đang mải nghĩ về điều gì đó. Anh yêu cả những lúc em giả vờ giận mà vẫn không nhịn được cười. Mỗi chi tiết nhỏ đó — anh nhớ hết, và trân trọng từng cái một.',
   'Cảm ơn em vì đã tin tưởng anh, vì đã cho anh được ở bên em, vì đã là chính em — chân thật, dịu dàng và đặc biệt đến vậy. Được yêu em là điều anh thấy may mắn nhất trong năm nay.',
   'Một tháng rồi — và anh biết chắc rằng anh muốn còn rất nhiều tháng nữa bên em. Anh không cần nói nhiều, chỉ cần em biết: trong trái tim anh, chỗ của em chưa bao giờ lung lay.',
