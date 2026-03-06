@@ -22,6 +22,7 @@ const LETTER_PARAGRAPHS = [
   'Anh yêu cái cách em cười khi anh nói điều gì đó ngốc nghếch. Anh yêu ánh mắt em khi em đang mải nghĩ về điều gì đó. Anh yêu cả những lúc em giả vờ giận mà vẫn không nhịn được cười. Mỗi chi tiết nhỏ đó — anh nhớ hết, và trân trọng từng cái một.',
   'Cảm ơn em vì đã tin tưởng anh, vì đã cho anh được ở bên em, vì đã là chính em — chân thật, dịu dàng và đặc biệt đến vậy. Được yêu em là điều anh thấy may mắn nhất trong năm nay.',
   'Một tháng rồi — và anh biết chắc rằng anh muốn còn rất nhiều tháng nữa bên em. Anh không cần nói nhiều, chỉ cần em biết: trong trái tim anh, chỗ của em chưa bao giờ lung lay.',
+  'Và ngày mai — ngày 8 tháng 3 — là ngày của em. Nhân ngày Quốc tế Phụ nữ, anh muốn chúc em luôn hạnh phúc, luôn rạng rỡ, và luôn biết rằng em xứng đáng được yêu thương hết mực. Chúc mừng 8/3 em nhé! 🌸',
   'Anh yêu em — hôm qua, hôm nay, và tất cả những ngày sau này. 💕',
   'Mãi mãi của em,',
 ]
