@@ -19,16 +19,16 @@ const HERO_IMAGES = [
 
 // ── Customise here ──────────────────────────────────────────────────────────
 const HER_NAME = 'Ngọc Hồng'          // 💌 Thay tên người yêu tại đây
-const MESSAGE = 'Chúc mừng ngày 8 tháng 3'
-const SUB_MESSAGE = 'Dành tặng người con gái đặc biệt nhất trong cuộc đời anh'
+const MESSAGE = 'Tròn 1 Tháng Yêu Em'
+const SUB_MESSAGE = 'Ngày 7/3 — kỷ niệm một tháng · Ngày 8/3 — ngày của em ❤️'
 // ────────────────────────────────────────────────────────────────────────────
 
 const TYPEWRITER_TEXTS = [
-  'Em là điều tuyệt vời nhất đã xảy ra với anh ❤️',
-  '1 tháng bên nhau — mỗi ngày đều thật tuyệt 🥂',
-  'Anh yêu em rất nhiều 💕',
-  'Chúc em luôn hạnh phúc và rạng rỡ 🌸',
-  'Em là ánh sáng trong cuộc đời anh ✨',
+  '7/3 — Tròn đúng 1 tháng bên nhau 🥂',
+  'Mỗi ngày có em là một ngày hạnh phúc ❤️',
+  '30 ngày · 720 giờ · Vô số kỷ niệm đẹp 💕',
+  'Em là điều tuyệt vời nhất đã xảy ra với anh 🌸',
+  'Anh yêu em — hôm qua, hôm nay và mãi mãi ✨',
 ]
 
 function useTypewriter(texts: string[], speed = 60, pause = 2000) {
@@ -141,20 +141,30 @@ export default function HeroSection() {
           8 tháng 3 · Ngày của em
         </motion.div>
 
-        {/* 1-month anniversary badge */}
+        {/* 1-month anniversary — main visual centerpiece */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.35, duration: 0.7, type: 'spring', bounce: 0.4 }}
-          className="flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-5 py-1 sm:py-1.5 mb-4 sm:mb-5 font-cormorant text-xs sm:text-base tracking-wider"
-          style={{
-            background: 'linear-gradient(90deg, rgba(255,215,0,0.12), rgba(255,133,161,0.12), rgba(255,215,0,0.12))',
-            border: '1px solid rgba(255,215,0,0.3)',
-          }}
+          transition={{ delay: 0.35, duration: 1, type: 'spring', bounce: 0.35 }}
+          className="flex flex-col items-center mb-1 sm:mb-2"
         >
-          <span className="animate-heart-beat text-sm sm:text-base">🥂</span>
-          <span className="shimmer-text font-semibold">1 tháng yêu nhau · 7/3</span>
-          <span className="animate-heart-beat text-sm sm:text-base">🥂</span>
+          {/* Giant "01" counter */}
+          <div
+            className="font-playfair font-bold shimmer-text leading-none select-none"
+            style={{ fontSize: 'clamp(5.5rem, 24vw, 15rem)', lineHeight: 0.9 }}
+          >
+            01
+          </div>
+          {/* "THÁNG YÊU NHAU" label */}
+          <div className="font-cormorant tracking-[0.25em] sm:tracking-[0.45em] uppercase text-love-rose text-xs sm:text-xl mt-1 sm:mt-0">
+            tháng yêu nhau
+          </div>
+          {/* Date range */}
+          <div className="flex items-center gap-2 mt-1.5 sm:mt-2">
+            <span className="text-love-gold/60 text-[10px] sm:text-sm font-cormorant tracking-widest">7/2/2026</span>
+            <span className="animate-heart-beat text-xs sm:text-sm">🥂</span>
+            <span className="text-love-gold/60 text-[10px] sm:text-sm font-cormorant tracking-widest">7/3/2026</span>
+          </div>
         </motion.div>
 
         {/* Big heart */}

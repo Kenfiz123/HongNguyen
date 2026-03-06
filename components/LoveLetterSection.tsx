@@ -127,10 +127,10 @@ export default function LoveLetterSection() {
         className="text-center mb-8 sm:mb-16"
       >
         <p className="font-cormorant text-love-rose/70 tracking-widest uppercase text-xs sm:text-sm mb-2 sm:mb-3">
-          — Thư tình —
+          — Kỷ niệm 1 tháng · Thư tình —
         </p>
         <h2 className="font-playfair text-2xl sm:text-4xl md:text-5xl text-love-cream text-glow">
-          Anh muốn nói với em...
+          Một tháng — một trái tim
         </h2>
         <div className="flex justify-center gap-1.5 sm:gap-2 mt-3 sm:mt-4 text-lg sm:text-xl">
           {'❤️🌸💕🌸❤️'.split('').map((c, i) => (

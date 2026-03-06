@@ -17,10 +17,10 @@ const MONTAGE_PHOTOS = [
 ]
 
 // ── Customise here ──────────────────────────────────────────────────────────
-const FINAL_TITLE = 'Chúc mừng ngày 8/3'
-const FINAL_SUBTITLE = 'Happy International Women\'s Day'
-const FINAL_MESSAGE = 'Chúc em luôn hạnh phúc, xinh đẹp\nvà rạng rỡ mãi mãi!'
-const LOVE_DECLARATION = 'Anh yêu em! ❤️'
+const FINAL_TITLE = 'Tròn 1 Tháng Yêu Em'
+const FINAL_SUBTITLE = '7/3/2026 · Kỷ niệm 1 tháng bên nhau · Happy 8/3 ❤️'
+const FINAL_MESSAGE = '1 tháng qua là 1 tháng hạnh phúc nhất\ntrong cuộc đời anh — cảm ơn em đã ở đây! 🥂'
+const LOVE_DECLARATION = 'Anh yêu em mãi mãi! ❤️'
 // ────────────────────────────────────────────────────────────────────────────
 
 async function launchFireworks() {

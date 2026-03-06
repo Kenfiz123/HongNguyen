@@ -22,12 +22,12 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-  title: 'Happy 8/3 ❤️ — Dành cho em',
-  description: 'Một món quà nhỏ từ trái tim anh, dành tặng em nhân ngày 8/3.',
-  keywords: ['8/3', 'Ngày Quốc tế Phụ nữ', 'Happy Women Day', 'tình yêu'],
+  title: 'Tròn 1 Tháng Yêu Em ❤️ · Happy 8/3',
+  description: 'Kỷ niệm 1 tháng yêu nhau (7/3) và chúc mừng ngày 8/3 — Dành tặng Ngọc Hồng.',
+  keywords: ['1 tháng', 'kỷ niệm', '8/3', 'Ngày Quốc tế Phụ nữ', 'tình yêu', 'Ngọc Hồng'],
   openGraph: {
-    title: 'Happy 8/3 ❤️ — Dành cho em',
-    description: 'Một món quà nhỏ từ trái tim anh',
+    title: 'Tròn 1 Tháng Yêu Em ❤️ · Happy 8/3',
+    description: 'Kỷ niệm 1 tháng yêu nhau · Dành tặng Ngọc Hồng',
     type: 'website',
   },
 }
